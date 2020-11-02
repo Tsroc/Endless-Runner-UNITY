@@ -33,13 +33,16 @@ public class CitySpawner : MonoBehaviour
 
     public void SpawnCityPlot()
     {
-            GameObject plotLeft = plots[Random.Range(0, plots.Count)];
-            GameObject plotRight = plots[Random.Range(0, plots.Count)];
+        /*
+            Destroy the city plots after they are no longer required.
+        */
+        GameObject plotLeft = plots[Random.Range(0, plots.Count)];
+        GameObject plotRight = plots[Random.Range(0, plots.Count)];
 
-            seePos = lastSPos - size;
+        seePos = lastSPos - size;
 
-            Instantiate(plotLeft, new Vector3(xPosL, 0, seePos), plotLeft.transform.rotation, cityplotParent.transform);
-            Instantiate(plotRight, new Vector3(xPosR, 0, seePos), new Quaternion(0, 180, 0, 0), cityplotParent.transform);
-            lastSPos += size;
+        Instantiate(plotLeft, new Vector3(xPosL, 0, seePos), plotLeft.transform.rotation, cityplotParent.transform);
+        Instantiate(plotRight, new Vector3(xPosR, 0, seePos), new Quaternion(0, 180, 0, 0), cityplotParent.transform);
+        lastSPos += size;
     }
 }

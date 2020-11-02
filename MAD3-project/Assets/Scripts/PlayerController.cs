@@ -4,19 +4,28 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private SpawnManager spawnManager;
+    private Rigidbody rb;
+    private Animator animator;
+
     public float movementSpeed = 10.0f;
     public float xMovementSpeed = 5.0f;
-    private SpawnManager spawnManager;
-    private float yaw = 20.0f;
+    private float jumpVelocity = 5.0f; 
+    private float yaw = 15.0f;
     private float screenClamp = 4.8f;
-    // Start is called before the first frame update
+
+    private bool grounded = true;
+    
     void Start()
     {
        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+       rb = gameObject.GetComponent<Rigidbody>();
+       animator = gameObject.GetComponent<Animator>();
     }
 
     void Update() {
         ProcessMovement();
+        ProcessJump();
         ProcessRotation();
     }
 
@@ -29,16 +38,26 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        spawnManager.SpawnTriggerEntered();
+        if(other.tag == "SpawnTrigger"){
+            spawnManager.SpawnTriggerEntered();
+        }
+        if (other.tag == "Obstacle"){
+            // If obstacle, what happens?
+        Debug.Log("Obstacle collision");
+        }
+        if(other.tag == "Ground"){
+            grounded = true;
+            animator.SetBool("Jump", false);
+        }
     }
 
     //private void processMovement()
     private void ProcessMovement()
     {
         float hMovement = Input.GetAxis("Horizontal") * xMovementSpeed;
-        float vMovement =  movementSpeed; // /2
 
-        transform.Translate(new Vector3(hMovement, 0, vMovement) * Time.deltaTime);
+        transform.Translate(new Vector3(hMovement, 0, movementSpeed) * Time.deltaTime);
+        //rb.AddForce(hMovement*30, 0, movementSpeed*20);
     }
 
     IEnumerator WaitForFixed()
@@ -52,8 +71,20 @@ public class PlayerController : MonoBehaviour
         return new Vector3(Mathf.Clamp(transform.position.x, -screenClamp, screenClamp), transform.position.y, transform.position.z);
     }
 
+    private void ProcessJump(){
+        if(Input.GetKeyDown("space")){
+            if(grounded == true){
+                // Allowed to jump.
+                grounded = false;
+                rb.AddForce(new Vector3(0, jumpVelocity, 0), ForceMode.Impulse);
+                animator.SetBool("Jump", true);
+            }
+        }
+    }
+
     private void ProcessRotation()
     {
+        // Feels clunky. Return to this!
         if (Input.GetAxis("Horizontal") > 0)    // Moves Right.
             transform.localRotation = Quaternion.Euler(0, yaw, 0);
         else if (Input.GetAxis("Horizontal") < 0)   // Moves Left.

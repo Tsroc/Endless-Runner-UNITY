@@ -26,6 +26,9 @@ public class TrackSpawner: MonoBehaviour
 
     public void MoveTrack()
     {
+        /*
+            Should relocate the tracks rather than instantiating a new track.
+        */
         // Trying to move the objects position - run into issues.
         GameObject movedTrack = tracks[0];
         tracks.Remove(movedTrack);

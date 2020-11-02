@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ObstacleSpawner: MonoBehaviour
 {
-    private int initialPlots =5;
+    private int initialPlots = 3;
     //Change name
     private float size = 25;
     private float prevZPos = 50;
@@ -31,6 +31,9 @@ public class ObstacleSpawner: MonoBehaviour
 
     public void SpawnObstacles()
     {
+        /*
+            Destroy obstacles after they are no longer required.
+        */
         GameObject obstacle = obstacles[Random.Range(0, obstacles.Count)];
 
         zPos = prevZPos - size;
