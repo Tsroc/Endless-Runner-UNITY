@@ -18,12 +18,14 @@ public class PlayerController : MonoBehaviour
     
     void Start()
     {
-       spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
-       rb = gameObject.GetComponent<Rigidbody>();
-       animator = gameObject.GetComponent<Animator>();
+        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        rb = gameObject.GetComponent<Rigidbody>();
+        animator = gameObject.GetComponent<Animator>();
     }
 
     void Update() {
+        animator.speed = 1.2f;								
+        animator.SetFloat ("Speed", movementSpeed);							
         ProcessMovement();
         ProcessJump();
         ProcessRotation();
@@ -47,7 +49,6 @@ public class PlayerController : MonoBehaviour
         }
         if(other.tag == "Ground"){
             grounded = true;
-            animator.SetBool("Jump", false);
         }
     }
 
@@ -77,7 +78,7 @@ public class PlayerController : MonoBehaviour
                 // Allowed to jump.
                 grounded = false;
                 rb.AddForce(new Vector3(0, jumpVelocity, 0), ForceMode.Impulse);
-                animator.SetBool("Jump", true);
+                animator.Play("Jump");
             }
         }
     }
