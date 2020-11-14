@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     private SpawnManager spawnManager;
     private Rigidbody rb;
     private Animator animator;
+    private GameManager gameManager;
 
     public float movementSpeed = 10.0f;
     public float xMovementSpeed = 5.0f;
@@ -15,20 +16,31 @@ public class PlayerController : MonoBehaviour
     private float screenClamp = 4.8f;
 
     private bool grounded = true;
+    private bool hasEnergy = true;
     
     void Start()
     {
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         rb = gameObject.GetComponent<Rigidbody>();
         animator = gameObject.GetComponent<Animator>();
     }
 
-    void Update() {
-        animator.speed = 1.2f;								
-        animator.SetFloat ("Speed", movementSpeed);							
-        ProcessMovement();
-        ProcessJump();
-        ProcessRotation();
+    void Update()
+    {
+        if(hasEnergy)
+        {
+            animator.speed = 1.2f;								
+            animator.SetFloat ("Speed", movementSpeed);							
+            ProcessMovement();
+            ProcessJump();
+            ProcessRotation();
+        }
+        else
+        {
+            animator.SetFloat ("Speed", 0);							
+            // Call function end the game.
+        }
     }
 
     // Update is called once per frame
@@ -92,5 +104,12 @@ public class PlayerController : MonoBehaviour
             transform.localRotation = Quaternion.Euler(0, -yaw, 0);
         else
             transform.localRotation = Quaternion.Euler(0, 0, 0);
+    }
+
+    private void EnergyDepleted()
+    {
+        hasEnergy = false;
+        gameManager.SendMessage("GameOver");
+        //Debug.Log("Energy depleted.");
     }
 }

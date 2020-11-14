@@ -11,7 +11,7 @@ public class NewController_arisa : MonoBehaviour
 		public float lookSmoother = 3.0f;			
 		public bool useCurves = true;						
 		public float useCurvesHeight = 0.5f;		
-		public float forwardSpeed = 7.0f;
+		public float forwardSpeed = 4.0f;
 		public float backwardSpeed = 2.0f;
 		public float rotateSpeed = 2.0f;
 		public float jumpPower = 3.0f;
@@ -123,4 +123,14 @@ public class NewController_arisa : MonoBehaviour
 			    col.height = orgColHight;
 			    col.center = orgVectColCenter;
 		    }
+
+
+	public EnergyBar energyBar;
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "EnergyPickup"){
+			energyBar.GainEnergy();
+        }
+	}
+
 }

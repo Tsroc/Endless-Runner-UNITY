@@ -7,6 +7,7 @@ TagManager:
   - SpawnTrigger
   - Obstacle
   - Ground
+  - EnergyPickup
   layers:
   - Default
   - TransparentFX
