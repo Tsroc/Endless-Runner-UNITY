@@ -129,7 +129,7 @@ public class NewController_arisa : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "EnergyPickup"){
-			energyBar.GainEnergy();
+			energyBar.GainPowerup();
         }
 	}
 

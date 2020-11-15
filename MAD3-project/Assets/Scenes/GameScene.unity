@@ -201,7 +201,6 @@ GameObject:
   - component: {fileID: 161427718}
   - component: {fileID: 161427717}
   - component: {fileID: 161427719}
-  - component: {fileID: 161427720}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -249,19 +248,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pausePanel: {fileID: 1642000148}
---- !u!114 &161427720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 161427716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f38667b4cf187ab4198e01d7eaaa2057, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameoverPanel: {fileID: 0}
 --- !u!1001 &170660875
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -526,6 +512,7 @@ GameObject:
   - component: {fileID: 754001368}
   - component: {fileID: 754001371}
   - component: {fileID: 754001372}
+  - component: {fileID: 754001373}
   m_Layer: 0
   m_Name: SpawnManager
   m_TagString: Untagged
@@ -612,7 +599,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ded87ba259e2ad74b86e15728a35fff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trackPerLevel: 7
   obstacles01:
   - {fileID: 8084541880894376828, guid: 582e65b8bfe0bde4d89ee5629a69b998, type: 3}
   - {fileID: 3001316357307833037, guid: 319227d5e0dbcaa458e4fe2b02465713, type: 3}
@@ -629,6 +615,18 @@ MonoBehaviour:
   - {fileID: 5441949345679826712, guid: c17519db36fcb3b4c9fc954a6156a918, type: 3}
   - {fileID: 2723165768917828808, guid: 0eea79b4baede6644921ac33223bddfd, type: 3}
   - {fileID: 7942348940487000022, guid: 136236d2196f7534c94902feea155fd7, type: 3}
+--- !u!114 &754001373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754001367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12aa946592c55174cb626eac7f8ea5c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &780500518 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1982082198821203397, guid: 59e8b685adf6e7641826a972253e18be,
@@ -1028,7 +1026,12 @@ PrefabInstance:
     - target: {fileID: 7047633050785170955, guid: 9d1d0c0b81eaee048aa26e47d63a8521,
         type: 3}
       propertyPath: m_Name
-      value: Energy Bar
+      value: EnergyBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047633050785170955, guid: 9d1d0c0b81eaee048aa26e47d63a8521,
+        type: 3}
+      propertyPath: m_TagString
+      value: EnergyBar
       objectReference: {fileID: 0}
     - target: {fileID: 7047633050785171060, guid: 9d1d0c0b81eaee048aa26e47d63a8521,
         type: 3}
@@ -1639,7 +1642,7 @@ PrefabInstance:
     - target: {fileID: 5604314603042547088, guid: 5320074f418f48d4e87d182a9d72326b,
         type: 3}
       propertyPath: m_Name
-      value: Pause Panel
+      value: PausePanel
       objectReference: {fileID: 0}
     - target: {fileID: 5604314603042547088, guid: 5320074f418f48d4e87d182a9d72326b,
         type: 3}

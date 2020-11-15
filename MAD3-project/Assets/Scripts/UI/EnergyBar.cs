@@ -10,28 +10,63 @@ public class EnergyBar : MonoBehaviour
     private Energy energy;
     private GameObject player;
 
+
     private void Start()
     {
         player = GameObject.FindWithTag("Player");
         barImg = transform.Find("Energy").GetComponent<Image>();
         energy = new Energy();
+        SetColor(Color.green);
     }
 
     private void Update()
     {
-        if(energy.GetCurrent() == 0)
+        if(energy != null)
         {
-            player.SendMessage("EnergyDepleted");
-            energy = null;
-        }
+            if(energy.GetCurrent() == 0)
+            {
+                player.SendMessage("EnergyDepleted");
+                energy = null;
+            }
 
-        energy.Update();
-        barImg.fillAmount = energy.GetEnergyNormalized();
+            energy.Update();
+            barImg.fillAmount = energy.GetEnergyNormalized();
+        }
     }
 
-    public void GainEnergy()
+    public void GainPowerup()
     {
         energy.GainEnergy();
+    }
+
+    public void SetEnergyLevel(int level)
+    {
+        switch(level)
+        {
+            case 1: 
+                energy.SetDifficultyEasy();
+                break;
+            case 2:
+                energy.SetDifficultyMedium();
+                break;
+            case 3:
+                energy.SetDifficultyHard();
+                break;
+            default:
+                energy.SetDifficultyEasy();
+                break;
+        }
+    }
+
+    public int GetDifficulty()
+    {
+        return energy.GetDifficulty();
+    }
+
+    // Changing bar colour.
+    public void SetColor(Color color)
+    {
+        barImg.color = color;
     }
 
 }
@@ -43,13 +78,21 @@ public class Energy
     private float current;
     private float depletionRate;
     private float gainRate;
+    private int difficulty;
+
+    private float DEPLETION_RATE_01 = 5f;
+    private float DEPLETION_RATE_02 = 10f;
+    private float DEPLETION_RATE_03 = 15f;
+
+    private float GAIN_RATE_01 = 50f;
+    private float GAIN_RATE_02 = 30f;
+    private float GAIN_RATE_03 = 30f;
 
 
     public Energy()
     {
         current = 100;
-        depletionRate = 20f;
-        gainRate = 20f;
+        SetDifficultyEasy();
     }
 
     public void Update()
@@ -59,9 +102,14 @@ public class Energy
         //Debug.Log(current);
     }
 
-public float GetCurrent()
+    public float GetCurrent()
     {
         return current;
+    }
+
+    public int GetDifficulty()
+    {
+        return difficulty;
     }
 
     public void GainEnergy()
@@ -73,5 +121,26 @@ public float GetCurrent()
     public float GetEnergyNormalized()
     {
         return current / MAX_ENERGY;
+    }
+
+    public void SetDifficultyEasy()
+    {
+        difficulty = 1;
+        depletionRate = DEPLETION_RATE_01;
+        gainRate = GAIN_RATE_01;
+    }
+
+    public void SetDifficultyMedium()
+    {
+        difficulty = 2;
+        depletionRate = DEPLETION_RATE_02;
+        gainRate = GAIN_RATE_02;
+    }
+
+    public void SetDifficultyHard()
+    {
+        difficulty = 3;
+        depletionRate = DEPLETION_RATE_03;
+        gainRate = GAIN_RATE_03;
     }
 }

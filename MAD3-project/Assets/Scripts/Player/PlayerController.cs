@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private GameManager gameManager;
     private SceneController sceneController; 
+    private EnergyBar energy;
 
     public float movementSpeed = 10.0f;
     public float xMovementSpeed = 5.0f;
@@ -24,8 +25,10 @@ public class PlayerController : MonoBehaviour
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         sceneController = GameObject.Find("SceneController").GetComponent<SceneController>();
+        energy = GameObject.Find("EnergyBar").GetComponent<EnergyBar>();
         rb = gameObject.GetComponent<Rigidbody>();
         animator = gameObject.GetComponent<Animator>();
+
     }
 
     void Update()
@@ -54,16 +57,26 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "SpawnTrigger"){
+
+        if(other.tag == "SpawnTrigger")
+        {
             spawnManager.SpawnTriggerEntered();
         }
-        if (other.tag == "Obstacle"){
+        if (other.tag == "Obstacle")
+        {
             // If obstacle, what happens?
-        Debug.Log("Obstacle collision");
+            Debug.Log("Obstacle collision");
         }
-        if(other.tag == "Ground"){
+        if(other.tag == "Ground")
+        {
             grounded = true;
         }
+        if(other.tag == "EnergyPickup"){
+            Debug.Log("EnergyPickup");
+			energy.GainPowerup();
+            //Destroy(other);
+        }
+
     }
 
     //private void processMovement()

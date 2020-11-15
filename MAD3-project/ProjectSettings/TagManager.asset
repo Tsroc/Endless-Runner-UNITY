@@ -8,6 +8,7 @@ TagManager:
   - Obstacle
   - Ground
   - EnergyPickup
+  - EnergyBar
   layers:
   - Default
   - TransparentFX

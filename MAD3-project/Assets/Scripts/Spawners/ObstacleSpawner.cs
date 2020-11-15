@@ -5,52 +5,56 @@ using UnityEngine;
 
 public class ObstacleSpawner: MonoBehaviour
 {
+    SpawnManager spawnManager;
     // Setting up the plots. 
-    private int initialPlots = 3;
     private float plotSize = 25;
     private float prevZPos = 50;
     private float zPos = 0;
-
-    private int trackCounter;
-    [SerializeField] private int trackPerLevel;
 
     public List<GameObject> obstacles01;
     public List<GameObject> obstacles02;
     public List<GameObject> obstacles03;
     private GameObject obstacleParent;
 
-
     // Start is called before the first frame update
     void Start()
     {
+        spawnManager = GetComponent<SpawnManager>();
+
         obstacleParent = GameObject.Find("ObstacleParent");
         if (!obstacleParent){
             obstacleParent = new GameObject("ObstacleParent");
         }
 
-        for(int i = 0; i < initialPlots; i++)
+        SetupInitialPlots();
+
+    }
+
+    public void SpawnObstacles(int level)
+    {
+        switch(level)
         {
-            SpawnObstacles();
+            case 1:
+                SpawnEasyLevel();
+                break;
+            case 2:
+                SpawnMediumLevel();
+                break;
+            case 3:
+                SpawnHardLevel();
+                break;
+            default:
+                SpawnEasyLevel();
+                break;
         }
     }
 
-    public void SpawnObstacles()
+    private void SetupInitialPlots()
     {
-        // Creating levels
-        if(trackCounter < trackPerLevel)
+        for(int i = 0; i < spawnManager.GetInitialPlots(); i++)
         {
-            SpawnEasyLevel();
+            SpawnObstacles(1);
         }
-        else if (trackCounter < trackPerLevel*2)
-        {
-            SpawnMediumLevel();
-        }
-        else
-        {
-            SpawnHardLevel();    
-        }
-
-        trackCounter++;
     }
 
     private void SpawnEasyLevel()

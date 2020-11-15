@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CitySpawner : MonoBehaviour
 {
-    private int initialPlots =5;
+    SpawnManager spawnManager;
     //Change name
     private float size = 25;
     private float xPosL = -17.5f;
@@ -20,15 +20,14 @@ public class CitySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        spawnManager = GetComponent<SpawnManager>();
+
         cityplotParent = GameObject.Find("CityplotParent");
         if (!cityplotParent){
             cityplotParent = new GameObject("CityplotParent");
         }
 
-        for(int i = 0; i < initialPlots; i++)
-        {
-            SpawnCityPlot();
-        }
+        SetupInitialPlots();
     }
 
     public void SpawnCityPlot()
@@ -45,4 +44,13 @@ public class CitySpawner : MonoBehaviour
         Instantiate(plotRight, new Vector3(xPosR, 0, seePos), new Quaternion(0, 180, 0, 0), cityplotParent.transform);
         lastSPos += size;
     }
+
+    private void SetupInitialPlots()
+    {
+        for(int i = 0; i < spawnManager.GetInitialPlots()+2; i++)
+        {
+            SpawnCityPlot();
+        }
+    }
+
 }
