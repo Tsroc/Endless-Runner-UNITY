@@ -9,5 +9,6 @@ namespace Utilities
         public const string GAMESCENE = "GameScene";
         public const string LAUNCHSCENE = "LaunchScene";
         public const string LOADSCENE = "LoadScene";
+        public const string GAMEOVERSCENE = "GameoverScene";
     }
 }

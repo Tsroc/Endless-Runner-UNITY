@@ -43,7 +43,12 @@ public class SceneController : MonoBehaviour
         }
     }
 
-    public static void MenuScene()
+    public void Gameover()
+    {
+        SceneManager.LoadSceneAsync(SceneNames.GAMEOVERSCENE, LoadSceneMode.Additive);
+    }
+
+    public void MenuScene()
     {
         SceneManager.LoadSceneAsync(SceneNames.MENUSCENE);
     }

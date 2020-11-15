@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private Animator animator;
     private GameManager gameManager;
+    private SceneController sceneController; 
 
     public float movementSpeed = 10.0f;
     public float xMovementSpeed = 5.0f;
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     {
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        sceneController = GameObject.Find("SceneController").GetComponent<SceneController>();
         rb = gameObject.GetComponent<Rigidbody>();
         animator = gameObject.GetComponent<Animator>();
     }
@@ -109,7 +111,9 @@ public class PlayerController : MonoBehaviour
     private void EnergyDepleted()
     {
         hasEnergy = false;
-        gameManager.SendMessage("GameOver");
+        sceneController.Gameover();
+        //Destroy(gameObject);
+        //gameManager.SendMessage("GameOver");
         //Debug.Log("Energy depleted.");
     }
 }

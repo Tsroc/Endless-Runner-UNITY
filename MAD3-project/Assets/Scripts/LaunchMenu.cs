@@ -5,6 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class LaunchMenu : MonoBehaviour
 {
+    private SceneController sceneController;
+
+    private void Start()
+    {
+        sceneController = GameObject.Find("SceneController").GetComponent<SceneController>();
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return))
@@ -15,6 +21,6 @@ public class LaunchMenu : MonoBehaviour
 
     private void LaunchGame()
     {
-        SceneController.MenuScene();
+        sceneController.MenuScene();
     }
 }

@@ -22,6 +22,7 @@ public class EnergyBar : MonoBehaviour
         if(energy.GetCurrent() == 0)
         {
             player.SendMessage("EnergyDepleted");
+            energy = null;
         }
 
         energy.Update();
