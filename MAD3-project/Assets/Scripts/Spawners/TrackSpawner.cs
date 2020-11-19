@@ -5,36 +5,43 @@ using UnityEngine;
 
 public class TrackSpawner: MonoBehaviour
 {
-    public List<GameObject> tracks; 
-    public GameObject trackPrefab;
-    private float offset = 25f;
+    /*
+        TrackSpawner spawns the tracks along which the player travels.
+    */
+
+    [SerializeField] private GameObject trackPrefab;
+    [SerializeField] private List<GameObject> tracks; 
     private GameObject trackParent;
 
-    // Start is called before the first frame update
+    private float offset = 25f;
+
     void Start()
     {
-        if(tracks != null && tracks.Count > 0)
-        {
-            tracks = tracks.OrderBy(t => t.transform.position.z).ToList();
-        }
+        OrderTracks();
 
         trackParent = GameObject.Find("TrackParent");
         if (!trackParent){
             trackParent = new GameObject("TrackParent");
         }
     }
-
-    public void MoveTrack()
+    
+    /*
+        Orders tracks by z position
+    */
+    private void OrderTracks()
     {
-        /*
-            Should relocate the tracks rather than instantiating a new track.
-        */
-        // Trying to move the objects position - run into issues.
+        if(tracks != null && tracks.Count > 0)
+        {
+            tracks = tracks.OrderBy(t => t.transform.position.z).ToList();
+        }
+    }
+
+    public void SpawnTrack()
+    {
         GameObject movedTrack = tracks[0];
         tracks.Remove(movedTrack);
         Destroy(movedTrack);
         float newZ = tracks[tracks.Count - 1].transform.position.z + offset;
-
 
         GameObject newTrack = Instantiate(trackPrefab, new Vector3(0, 0, newZ), Quaternion.identity, trackParent.transform);
         tracks.Add(newTrack);

@@ -8,10 +8,18 @@ using Utilities;
 
 public class SceneController : MonoBehaviour
 {
-    // Callback info: https://www.youtube.com/watch?v=3I5d2rUJ0pE
+    /*
+        SceneController manages transitions between scenes.
+    */
 
+    // Allows for the loadscene to be shown while the scene assigned to this Action loads.
+    // Callback info: https://www.youtube.com/watch?v=3I5d2rUJ0pE
     private static Action onLoaderCallback;
 
+
+    /*
+        Will call the gamescene, loadscene will load on the next update and remain until the gamescene is loaded.
+    */
     public void PlayGame()
     {
         // Set the loader callback action to load the game scene
@@ -22,6 +30,9 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadSceneAsync(SceneNames.LOADSCENE);
     }
 
+    /*
+        Will call the menuscene, loadscene will load on the next update and remain until the menuscene is loaded.
+    */
     public void ExitGame()
     {
         // Set the loader callback action to load the game scene
@@ -34,7 +45,7 @@ public class SceneController : MonoBehaviour
 
     public static void LoaderCallback()
     {
-        // Triggered after the first Update which lewts the scene refresh
+        // Triggered after the first Update which lets the scene refresh
         // Execute the loader callback action which will load the game scene
         if(onLoaderCallback != null)
         {
@@ -43,16 +54,25 @@ public class SceneController : MonoBehaviour
         }
     }
 
+    /*
+        Loads the gameoverscene additively.
+    */
     public void Gameover()
     {
         SceneManager.LoadSceneAsync(SceneNames.GAMEOVERSCENE, LoadSceneMode.Additive);
     }
 
+    /*
+        Loads the menuscene.
+    */
     public void MenuScene()
     {
         SceneManager.LoadSceneAsync(SceneNames.MENUSCENE);
     }
 
+    /*
+        Exits the application.
+    */
     public void QuitGame(){
         Application.Quit();
     }

@@ -5,19 +5,29 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    /*
+        GameManager updates the distance travelled and updates it to the screen.
+    */
+    
     private GameObject player;
     [SerializeField] private Text distanceTravelled;
 
-    // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
     }
 
-    // Update is called once per frame
     void Update()
     {
+        UpdateDistance();
+    }
+    
+    /*
+        Updates the distance based on movement along the z-axis.
+    */
+    private void UpdateDistance()
+    {
        int dist = Mathf.RoundToInt(player.transform.position.z);
-       distanceTravelled.text = dist.ToString();
+       distanceTravelled.text = dist.ToString() + "m";
     }
 }

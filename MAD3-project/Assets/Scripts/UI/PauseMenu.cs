@@ -4,43 +4,46 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
+    /*
+        PauseMenu will toggle the pause panel on and off.
+    */
+
     [SerializeField] private GameObject pausePanel;
 
-    private static bool isPaused = false;
+    private static bool pause = false;
 
     void Start()
     {
-        ResumeGame();
+        TogglePause(pause);
     }
 
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if(isPaused)
-            {
-                ResumeGame();
-            }
-            else
-            {
-                PauseGame();
-            }
+            TogglePause(pause);
         }
     }
     
-    public void ResumeGame()
+    /*
+        Toggles the pause functions.
+        If true, sets timescale to 0 and displays the pause panel.
+        If false, sets timescale to 1 and hides the pause panel.
+    */
+    private void TogglePause(bool paused)
     {
-        pausePanel.SetActive(false);
-        Time.timeScale = 1f;
-        isPaused = false;
-        Cursor.visible = false;
+        pausePanel.SetActive(paused);
+        
+        if(paused)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+
+        pause = !paused;
     }
 
-    private void PauseGame()
-    {
-        pausePanel.SetActive(true);
-        Time.timeScale = 0f;
-        isPaused = true;
-        Cursor.visible = true;
-    }
 }

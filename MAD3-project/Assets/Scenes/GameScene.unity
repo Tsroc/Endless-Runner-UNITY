@@ -532,14 +532,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66ae7868eeeecdf4a87459dfb295d8de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trackPrefab: {fileID: 1982082198821203397, guid: 59e8b685adf6e7641826a972253e18be,
+    type: 3}
   tracks:
   - {fileID: 281904371}
   - {fileID: 780500518}
   - {fileID: 1999259304}
   - {fileID: 1147447274}
   - {fileID: 871717840}
-  trackPrefab: {fileID: 1982082198821203397, guid: 59e8b685adf6e7641826a972253e18be,
-    type: 3}
 --- !u!114 &754001369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,6 +552,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8996faa7fbfef05459c1936b58751535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PLOTS_PER_DIFFICULTY: 10
+  initialPlots: 3
+  plotsToSpawn: 5
 --- !u!4 &754001370
 Transform:
   m_ObjectHideFlags: 0
@@ -578,7 +581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99e5ee6c99eea3c489d85b07d7959534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plots:
+  plotsPrefab:
   - {fileID: 351663894611347068, guid: 24a50dab5d46cd94e8a6f2a5648383be, type: 3}
   - {fileID: 7482187238284059107, guid: eaf891b5437a0a24b87467a7ddbd3be1, type: 3}
   - {fileID: 692313555039605240, guid: 6153d6200065b214b83258206d20e034, type: 3}
@@ -599,19 +602,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ded87ba259e2ad74b86e15728a35fff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacles01:
+  obstacles01Prefab:
   - {fileID: 8084541880894376828, guid: 582e65b8bfe0bde4d89ee5629a69b998, type: 3}
   - {fileID: 3001316357307833037, guid: 319227d5e0dbcaa458e4fe2b02465713, type: 3}
   - {fileID: 8791028954028798993, guid: 128b017377fb67b43b3a07fa80387d75, type: 3}
   - {fileID: 4314162745234008265, guid: 0691b6ba2cb2b5b41af0962ffa6180ed, type: 3}
   - {fileID: 2309824767951479402, guid: 88188a31d590b2647bb81b25bf52d76d, type: 3}
-  obstacles02:
+  obstacles02Prefab:
   - {fileID: 4340975314684226307, guid: 45834dbf64b985b45bf46385e7dcc13c, type: 3}
   - {fileID: 3728602105720810800, guid: b887e951d558a6b47a8f41736f798850, type: 3}
   - {fileID: 608679733715660367, guid: 7de812dfadc874e4bba72d94e2001639, type: 3}
   - {fileID: 3354402753943395919, guid: 2227ac6b22b00404a80e0252479cdf5f, type: 3}
   - {fileID: 6966001873268569743, guid: a6ed469337110fb4fba42f4571ec1d79, type: 3}
-  obstacles03:
+  obstacles03Prefab:
   - {fileID: 5441949345679826712, guid: c17519db36fcb3b4c9fc954a6156a918, type: 3}
   - {fileID: 2723165768917828808, guid: 0eea79b4baede6644921ac33223bddfd, type: 3}
   - {fileID: 7942348940487000022, guid: 136236d2196f7534c94902feea155fd7, type: 3}
@@ -1023,6 +1026,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 871652938}
     m_Modifications:
+    - target: {fileID: 7047633049943458061, guid: 9d1d0c0b81eaee048aa26e47d63a8521,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7047633050785170955, guid: 9d1d0c0b81eaee048aa26e47d63a8521,
         type: 3}
       propertyPath: m_Name

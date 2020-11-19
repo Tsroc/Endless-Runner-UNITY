@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class PlayerController_MainMenu : MonoBehaviour
 {
-    // Allows the player to perform rest animation at the main menu.
+    /*
+        PlayerController_MainMenu allows for player controls at the main sceen. Controls are limited to performing the rest animation.
+    */
+
     private Animator animator;
     
     void Start()
@@ -16,6 +19,9 @@ public class PlayerController_MainMenu : MonoBehaviour
         ProcessRest();
     }
 
+    /*
+        Player performs rest animation if space is pressed.
+    */
     private void ProcessRest(){
         if(Input.GetKeyDown("space")){
             if (!animator.IsInTransition (0)) {

@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    TrackSpawner trackSpawner;
-    CitySpawner citySpawner;
-    ObstacleSpawner obstacleSpawner;
-    DifficultyManager difficultyManager;
+    /*
+        SpawnManager manages the three spawners, TrackSpawner, ObstacleSpawner and City Spawner.
+    */
 
-    private int PLOTS_PER_DIFFICULTY = 10;
-    private int initialPlots = 3;    //this variable may be changed.
+    private TrackSpawner trackSpawner;
+    private CitySpawner citySpawner;
+    private ObstacleSpawner obstacleSpawner;
+    private DifficultyManager difficultyManager;
+
+    [SerializeField] private int PLOTS_PER_DIFFICULTY = 10;
+    [SerializeField] private int initialPlots = 3;
+    [SerializeField] private int plotsToSpawn;
     private int plotsPlaced;
 
-    // Start is called before the first frame update
     void Start()
     {
         trackSpawner = GetComponent<TrackSpawner>();
@@ -22,21 +26,33 @@ public class SpawnManager : MonoBehaviour
         difficultyManager = GetComponent<DifficultyManager>();
 
         plotsPlaced = initialPlots;
+        plotsToSpawn = initialPlots+2;
         Debug.Log("Difficulty: " + difficultyManager.GetDifficulty());
     }
 
+    // == Accessor Methods
+    public int GetInitialPlots()
+    {
+        return initialPlots;
+    }
+
+    public int GetPlotsToSpawn()
+    {
+        return plotsToSpawn;
+    }
+
+    public int GetPlotsPlaced()
+    {
+        return plotsPlaced;
+    }
+
+    /*
+        When trigger is entered (Called from player script),
+        Spawns plots and increases difficulty if necessary.
+    */
     public void SpawnTriggerEntered()
     {
         SpawnPlot();
-    }
-
-    private void SpawnPlot()
-    {
-        trackSpawner.MoveTrack();
-        citySpawner.SpawnCityPlot();
-        obstacleSpawner.SpawnObstacles(difficultyManager.GetDifficulty());
-
-        plotsPlaced++;
 
         if (plotsPlaced == PLOTS_PER_DIFFICULTY)
         {
@@ -48,14 +64,16 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    // == Accessor Methods
-    public int GetInitialPlots()
+    /*
+        Spawns track, city and obstacle plots
+    */
+    private void SpawnPlot()
     {
-        return initialPlots;
+        trackSpawner.SpawnTrack();
+        citySpawner.SpawnCityPlot();
+        obstacleSpawner.SpawnObstacles(difficultyManager.GetDifficulty());
+
+        plotsPlaced++;
     }
 
-    public int GetPlotsPlaced()
-    {
-        return plotsPlaced;
-    }
 }

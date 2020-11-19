@@ -5,11 +5,14 @@ using UnityEngine.UI;
 
 public class EnergyBar : MonoBehaviour
 {
-    // Energy bar info: https://www.youtube.com/watch?v=gHdXkGsqnlw
+    /*
+        EnergyBar manages the displayed energy bar on the UI, it is linked to the energy class.
+            Energy bar info: https://www.youtube.com/watch?v=gHdXkGsqnlw
+    */
+
     private Image barImg;
     private Energy energy;
     private GameObject player;
-
 
     private void Start()
     {
@@ -34,36 +37,33 @@ public class EnergyBar : MonoBehaviour
         }
     }
 
+    /*
+        Adds energy. 
+    */
     public void GainPowerup()
     {
         energy.GainEnergy();
     }
 
+    /*
+        Sets the energy difficulty level.
+    */
     public void SetEnergyLevel(int level)
     {
-        switch(level)
-        {
-            case 1: 
-                energy.SetDifficultyEasy();
-                break;
-            case 2:
-                energy.SetDifficultyMedium();
-                break;
-            case 3:
-                energy.SetDifficultyHard();
-                break;
-            default:
-                energy.SetDifficultyEasy();
-                break;
-        }
+        energy.SetDifficulty(level);
     }
 
+    /*
+        Returns the energy difficulty level.
+    */
     public int GetDifficulty()
     {
         return energy.GetDifficulty();
     }
 
-    // Changing bar colour.
+    /*
+        Changes bar colour.
+    */
     public void SetColor(Color color)
     {
         barImg.color = color;
@@ -73,6 +73,10 @@ public class EnergyBar : MonoBehaviour
 
 public class Energy
 {
+    /*
+        Energy class manages the energy resource.
+    */
+
     public const int MAX_ENERGY = 100;
 
     private float current;
@@ -92,16 +96,16 @@ public class Energy
     public Energy()
     {
         current = 100;
-        SetDifficultyEasy();
+        SetDifficulty(1);
     }
 
     public void Update()
     {
         current -= depletionRate * Time.deltaTime;
         current = Mathf.Clamp(current, 0f, MAX_ENERGY);
-        //Debug.Log(current);
     }
 
+    // == Accessor Methods
     public float GetCurrent()
     {
         return current;
@@ -112,35 +116,47 @@ public class Energy
         return difficulty;
     }
 
+    /*
+        Increases the energy by the gainRate value. 
+    */
     public void GainEnergy()
     {
         current += gainRate;
         current = Mathf.Clamp(current, 0f, MAX_ENERGY);
     }
 
+    /*
+        Returns an energy value between 0-1.
+    */
     public float GetEnergyNormalized()
     {
         return current / MAX_ENERGY;
     }
 
-    public void SetDifficultyEasy()
+    public void SetDifficulty(int iDifficulty)
     {
-        difficulty = 1;
-        depletionRate = DEPLETION_RATE_01;
-        gainRate = GAIN_RATE_01;
+        difficulty = iDifficulty;
+
+        switch(difficulty)
+        {
+            case 1:
+                depletionRate = DEPLETION_RATE_01;
+                gainRate = GAIN_RATE_01;
+                break;
+            case 2:
+                depletionRate = DEPLETION_RATE_02;
+                gainRate = GAIN_RATE_02;
+                break;
+            case 3:
+                depletionRate = DEPLETION_RATE_03;
+                gainRate = GAIN_RATE_03;
+                break;
+            default:
+                depletionRate = DEPLETION_RATE_01;
+                gainRate = GAIN_RATE_01;
+                break;
+        }
+
     }
 
-    public void SetDifficultyMedium()
-    {
-        difficulty = 2;
-        depletionRate = DEPLETION_RATE_02;
-        gainRate = GAIN_RATE_02;
-    }
-
-    public void SetDifficultyHard()
-    {
-        difficulty = 3;
-        depletionRate = DEPLETION_RATE_03;
-        gainRate = GAIN_RATE_03;
-    }
 }

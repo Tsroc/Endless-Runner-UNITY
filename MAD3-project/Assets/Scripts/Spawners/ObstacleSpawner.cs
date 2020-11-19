@@ -5,21 +5,27 @@ using UnityEngine;
 
 public class ObstacleSpawner: MonoBehaviour
 {
-    SpawnManager spawnManager;
+    /*
+        ObstacleSpawner spawns obstacle plots along track.
+        There are three difficulty levels for obstacles, obstacles spawned are based on the difficulty level selected.
+    */
+
+    private SpawnManager spawnManager;
+    private GameObject obstacleParent;
+    [SerializeField] private List<GameObject> obstacles01Prefab;
+    [SerializeField] private List<GameObject> obstacles02Prefab;
+    [SerializeField] private List<GameObject> obstacles03Prefab;
+    private List<GameObject> obstaclePlots;
+
     // Setting up the plots. 
     private float plotSize = 25;
     private float prevZPos = 50;
     private float zPos = 0;
 
-    public List<GameObject> obstacles01;
-    public List<GameObject> obstacles02;
-    public List<GameObject> obstacles03;
-    private GameObject obstacleParent;
-
-    // Start is called before the first frame update
     void Start()
     {
         spawnManager = GetComponent<SpawnManager>();
+        obstaclePlots = new List<GameObject>();
 
         obstacleParent = GameObject.Find("ObstacleParent");
         if (!obstacleParent){
@@ -27,72 +33,66 @@ public class ObstacleSpawner: MonoBehaviour
         }
 
         SetupInitialPlots();
-
+        
     }
 
+    /*
+        Spawns an obstacle based on which difficulty level arg is passed.
+    */
     public void SpawnObstacles(int level)
     {
-        switch(level)
+        zPos = prevZPos - plotSize;
+        prevZPos += plotSize;
+        GameObject obstacle = Instantiate(getRandomObstacle(level), new Vector3(0, 0, zPos), new Quaternion(0, 0, 0, 0), obstacleParent.transform);
+        obstaclePlots.Add(obstacle);
+
+        DeleteUnusuedPlots();
+    }
+
+    /*
+        Deletes the plots at start if the plot size is greater than the specified number.
+    */
+    private void DeleteUnusuedPlots()
+    {
+        if(obstaclePlots.Count > spawnManager.GetPlotsToSpawn())
+        {
+            GameObject obstacle = obstaclePlots[0];
+            obstaclePlots.Remove(obstacle);
+            Destroy(obstacle);
+        }
+    }
+
+    /*
+        Returns a random obstacle path based on level arg passed.
+    */
+    private GameObject getRandomObstacle(int level)
+    {
+        switch (level)
         {
             case 1:
-                SpawnEasyLevel();
+                return obstacles01Prefab[Random.Range(0, obstacles01Prefab.Count)];
                 break;
             case 2:
-                SpawnMediumLevel();
+                return obstacles02Prefab[Random.Range(0, obstacles02Prefab.Count)];
                 break;
             case 3:
-                SpawnHardLevel();
+                return obstacles03Prefab[Random.Range(0, obstacles03Prefab.Count)];
                 break;
+
             default:
-                SpawnEasyLevel();
+                return null;
                 break;
         }
     }
 
+    /*
+        Spawns the initial obstacles.
+    */
     private void SetupInitialPlots()
     {
         for(int i = 0; i < spawnManager.GetInitialPlots(); i++)
         {
             SpawnObstacles(1);
         }
-    }
-
-    private void SpawnEasyLevel()
-    {
-        /*
-            Destroy obstacles after they are no longer required.
-        */
-        GameObject obstacle = obstacles01[Random.Range(0, obstacles01.Count)];
-
-        zPos = prevZPos - plotSize;
-
-        Instantiate(obstacle, new Vector3(0, 0, zPos), obstacle.transform.rotation, obstacleParent.transform);
-        prevZPos += plotSize;
-    }
-
-    private void SpawnMediumLevel()
-    {
-        /*
-            Destroy obstacles after they are no longer required.
-        */
-        GameObject obstacle = obstacles02[Random.Range(0, obstacles02.Count)];
-
-        zPos = prevZPos - plotSize;
-
-        Instantiate(obstacle, new Vector3(0, 0, zPos), obstacle.transform.rotation, obstacleParent.transform);
-        prevZPos += plotSize;
-    }
-
-    private void SpawnHardLevel()
-    {
-        /*
-            Destroy obstacles after they are no longer required.
-        */
-        GameObject obstacle = obstacles03[Random.Range(0, obstacles03.Count)];
-
-        zPos = prevZPos - plotSize;
-
-        Instantiate(obstacle, new Vector3(0, 0, zPos), obstacle.transform.rotation, obstacleParent.transform);
-        prevZPos += plotSize;
     }
 }

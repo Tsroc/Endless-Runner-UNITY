@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class DifficultyManager : MonoBehaviour
 {
+    /*
+        DifficultyManager controlls the game difficulty. Difficulty has a level of 1, 2 or 3.
+        Game difficulty is based on energy generation and depletion rates along with obstacle spawns. 
+        The energy bar will change colour to communicate the change in difficulty to the player.
+    */
+
     private int difficulty;
     private EnergyBar energy;
 
-    // Start is called before the first frame update
     void Start()
     {
         energy = GameObject.Find("EnergyBar").GetComponent<EnergyBar>();
@@ -19,6 +24,9 @@ public class DifficultyManager : MonoBehaviour
         return difficulty;
     }
 
+    /*
+        Increases the difficulty to a max of difficulty level 3.
+    */
     private void IncreaseDifficulty()
     {
         switch(difficulty)
@@ -39,6 +47,6 @@ public class DifficultyManager : MonoBehaviour
                 energy.SetEnergyLevel(difficulty);
                 break;
         }
-        Debug.Log("Increase difficulty invoked.");
+        Debug.Log("Increased difficulty.");
     }
 }
