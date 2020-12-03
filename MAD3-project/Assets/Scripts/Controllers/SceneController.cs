@@ -2,11 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+
+using Photon.Realtime;
+using Photon.Pun;
 
 using Utilities;
 
-public class SceneController : MonoBehaviour
+public class SceneController : MonoBehaviourPunCallbacks
 {
     /*
         SceneController manages transitions between scenes.
@@ -16,11 +20,22 @@ public class SceneController : MonoBehaviour
     // Callback info: https://www.youtube.com/watch?v=3I5d2rUJ0pE
     private static Action onLoaderCallback;
 
+    // Network variables
+    [SerializeField] Text feedbackText;
+    byte maxPlayersPerRoom = 2;
+    bool IsConnecting;
+    private string gameVersion = "1";
+
+    void Awake()
+    {
+        // Join a network.
+        PhotonNetwork.AutomaticallySyncScene = true;        
+    }
 
     /*
         Will call the gamescene, loadscene will load on the next update and remain until the gamescene is loaded.
     */
-    public void PlayGame()
+    public void ConnectSinglePlayer()
     {
         // Set the loader callback action to load the game scene
         onLoaderCallback = () => {
@@ -28,6 +43,63 @@ public class SceneController : MonoBehaviour
         };
 
         SceneManager.LoadSceneAsync(SceneNames.LOADSCENE);
+    }
+
+ public void ConnectMultiPlayer()
+    {
+        feedbackText.text = "";
+        IsConnecting = true;
+        //PhotonNetwork.NickName = playerName.text;
+
+        if(PhotonNetwork.IsConnected)
+        {
+            feedbackText.text += "\nJoining a Room...";
+            PhotonNetwork.JoinRandomRoom();
+        }
+        else
+        {
+            feedbackText.text += "\nConnecting to Network...";
+            PhotonNetwork.GameVersion = gameVersion;
+            PhotonNetwork.ConnectUsingSettings();
+        }
+    }
+
+    // Add Photon callbacks
+    public override void OnConnectedToMaster()
+    {
+        if(IsConnecting)
+        {
+            feedbackText.text += "\nConnected, joining room...";
+            PhotonNetwork.JoinRandomRoom();
+        }
+    }
+
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        feedbackText.text += "\nFailed to join random room...";
+        // If I'm the first player, create new room
+        PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = maxPlayersPerRoom});
+    }
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        feedbackText.text += "\nDisconnected: " + cause + "...";
+        IsConnecting = false;
+    }
+
+    public override void OnJoinedRoom()
+    {
+        feedbackText.text += "\nSuccessfully joined room, game starting...";
+        feedbackText.text += "\nThere are " + PhotonNetwork.CurrentRoom.PlayerCount + " other players...";
+        PhotonNetwork.LoadLevel(SceneNames.GAMESCENE);
+
+        /*
+        onLoaderCallback = () => {
+            PhotonNetwork.LoadLevel(SceneNames.GAMESCENE);
+        };
+
+        PhotonNetwork.LoadLevel (SceneNames.LOADSCENE);
+        */
     }
 
     /*

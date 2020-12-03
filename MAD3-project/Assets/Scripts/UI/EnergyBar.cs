@@ -96,7 +96,7 @@ public class Energy
     public Energy()
     {
         current = 100;
-        SetDifficulty(1);
+        SetDifficulty(0);
     }
 
     public void Update()
@@ -139,6 +139,9 @@ public class Energy
 
         switch(difficulty)
         {
+            case 0:
+                depletionRate = 0;
+                break;
             case 1:
                 depletionRate = DEPLETION_RATE_01;
                 gainRate = GAIN_RATE_01;

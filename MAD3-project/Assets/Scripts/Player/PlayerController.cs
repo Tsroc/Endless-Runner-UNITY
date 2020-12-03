@@ -15,8 +15,8 @@ public class PlayerController : MonoBehaviour
     private SceneController sceneController; 
     private EnergyBar energy;
 
-    [SerializeField] private float movementSpeed = 10.0f;
-    [SerializeField] private float xMovementSpeed = 5.0f;
+    private float movementSpeed = 0;//10f;
+    [SerializeField] private float xMovementSpeed = 5f;
     [SerializeField] private float jumpVelocity = 5.0f; 
     private float yaw = 15.0f;
     private float screenClamp = 4.8f;
@@ -34,8 +34,6 @@ public class PlayerController : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody>();
         animator = gameObject.GetComponent<Animator>();
 
-        animator.speed = 1.2f;								
-        animator.SetFloat ("Speed", movementSpeed);							
     }
 
     /*
@@ -54,6 +52,14 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetFloat ("Speed", 0);							
         }
+    }
+
+    // This method is used to allow the player to remain static until start button is selected.
+    public void SetupMovement()
+    {
+        movementSpeed = 10f;
+        animator.speed = 1.2f;								
+        animator.SetFloat ("Speed", movementSpeed);	
     }
 
     /*
