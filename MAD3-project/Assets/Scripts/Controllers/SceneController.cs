@@ -131,7 +131,7 @@ public class SceneController : MonoBehaviourPunCallbacks
     */
     public void Gameover()
     {
-        SceneManager.LoadSceneAsync(SceneNames.GAMEOVERSCENE, LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync(SceneNames.GAMEOVERSCENE);
     }
 
     /*

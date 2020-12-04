@@ -12,11 +12,10 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private Animator animator;
     private GameManager gameManager;
-    private SceneController sceneController; 
     private EnergyBar energy;
 
     private float movementSpeed = 0;//10f;
-    [SerializeField] private float xMovementSpeed = 5f;
+    private float xMovementSpeed = 0f;
     [SerializeField] private float jumpVelocity = 5.0f; 
     private float yaw = 15.0f;
     private float screenClamp = 4.8f;
@@ -28,7 +27,6 @@ public class PlayerController : MonoBehaviour
     {
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        sceneController = GameObject.Find("SceneController").GetComponent<SceneController>();
         energy = GameObject.Find("EnergyBar").GetComponent<EnergyBar>();
 
         rb = gameObject.GetComponent<Rigidbody>();
@@ -58,6 +56,7 @@ public class PlayerController : MonoBehaviour
     public void SetupMovement()
     {
         movementSpeed = 10f;
+        xMovementSpeed = 5f;
         animator.speed = 1.2f;								
         animator.SetFloat ("Speed", movementSpeed);	
     }
@@ -157,14 +156,5 @@ public class PlayerController : MonoBehaviour
             // Resets rotation if not moving along the x-axis.
             transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
-    }
-
-    /*
-        The game ends when energy is depleted.
-    */
-    private void EnergyDepleted()
-    {
-        hasEnergy = false;
-        sceneController.Gameover();
     }
 }

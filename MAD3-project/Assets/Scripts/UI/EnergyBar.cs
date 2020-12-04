@@ -13,9 +13,11 @@ public class EnergyBar : MonoBehaviour
     private Image barImg;
     private Energy energy;
     private GameObject player;
+    private SceneController sceneController; 
 
     private void Start()
     {
+        sceneController = GameObject.Find("SceneController").GetComponent<SceneController>();
         player = GameObject.FindWithTag("Player");
         barImg = transform.Find("Energy").GetComponent<Image>();
         energy = new Energy();
@@ -28,7 +30,8 @@ public class EnergyBar : MonoBehaviour
         {
             if(energy.GetCurrent() == 0)
             {
-                player.SendMessage("EnergyDepleted");
+                // Ends the game.
+                sceneController.SendMessage("Gameover");
                 energy = null;
             }
 
@@ -103,6 +106,7 @@ public class Energy
     {
         current -= depletionRate * Time.deltaTime;
         current = Mathf.Clamp(current, 0f, MAX_ENERGY);
+    
     }
 
     // == Accessor Methods

@@ -44,6 +44,8 @@ public class LevelLauncher : MonoBehaviour
                                                                 startPosition, startRotation, 0);
                 }
             }
+            
+            player.gameObject.tag="Player"; 
 
             if(PhotonNetwork.IsMasterClient)
             {
@@ -65,6 +67,7 @@ public class LevelLauncher : MonoBehaviour
         player.GetComponent<PlayerController>().enabled = true;
     }
 
+    [PunRPC]
     private void StartTheLevel()
     {
         energy = GameObject.Find("EnergyBar").GetComponent<EnergyBar>();
@@ -74,7 +77,8 @@ public class LevelLauncher : MonoBehaviour
 
     public void StartMultiPlayerGame()
     {
-        StartTheLevel();
+        PhotonView photonView = PhotonView.Get(this);
+        photonView.RPC("StartTheLevel", RpcTarget.All); 
         startButton.SetActive(false);
 
     }
