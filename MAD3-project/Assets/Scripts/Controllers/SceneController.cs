@@ -19,9 +19,9 @@ public class SceneController : MonoBehaviourPunCallbacks
     // Allows for the loadscene to be shown while the scene assigned to this Action loads.
     // Callback info: https://www.youtube.com/watch?v=3I5d2rUJ0pE
     private static Action onLoaderCallback;
+    [SerializeField] Text feedbackText;
 
     // Network variables
-    [SerializeField] Text feedbackText;
     byte maxPlayersPerRoom = 2;
     bool IsConnecting;
     private string gameVersion = "1";

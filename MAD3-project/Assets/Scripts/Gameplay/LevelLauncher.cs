@@ -8,8 +8,9 @@ using Photon.Pun;
 public class LevelLauncher : MonoBehaviour
 {
     [SerializeField] private GameObject[] playerPrefabs;
-    [SerializeField] private float levelStartDelay = 1.5f;
     [SerializeField] private GameObject startButton;
+    [SerializeField] private float levelStartDelay = 1.5f;
+    
     GameObject player = null;
     private EnergyBar energy;
 

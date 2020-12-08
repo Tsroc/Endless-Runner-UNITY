@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour
     */
 
     private Transform player;
+    
     private float yOffset = 2;
     private float zOffset = -2;
 

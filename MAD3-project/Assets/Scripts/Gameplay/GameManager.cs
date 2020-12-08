@@ -9,9 +9,11 @@ public class GameManager : MonoBehaviour
         GameManager updates the distance travelled and updates it to the screen.
     */
     
+    [SerializeField] private Text distanceTravelled;
+    
     private SceneController sceneController;
     private Transform maincamera;
-    [SerializeField] private Text distanceTravelled;
+
     private int offset = 2;
     private int dist;
 

@@ -10,10 +10,10 @@ public class EnergyBar : MonoBehaviour
             Energy bar info: https://www.youtube.com/watch?v=gHdXkGsqnlw
     */
 
+    private GameManager gameManager;
     private Image barImg;
     private Energy energy;
     private GameObject player;
-    private GameManager gameManager;
 
     private void Start()
     {
@@ -81,20 +81,17 @@ public class Energy
     */
 
     public const int MAX_ENERGY = 100;
+    private const float DEPLETION_RATE_01 = 5f;
+    private const float DEPLETION_RATE_02 = 10f;
+    private const float DEPLETION_RATE_03 = 15f;
+    private const float GAIN_RATE_01 = 50f;
+    private const float GAIN_RATE_02 = 30f;
+    private const float GAIN_RATE_03 = 30f;
 
     private float current;
     private float depletionRate;
     private float gainRate;
     private int difficulty;
-
-    private float DEPLETION_RATE_01 = 5f;
-    private float DEPLETION_RATE_02 = 10f;
-    private float DEPLETION_RATE_03 = 15f;
-
-    private float GAIN_RATE_01 = 50f;
-    private float GAIN_RATE_02 = 30f;
-    private float GAIN_RATE_03 = 30f;
-
 
     public Energy()
     {
@@ -163,7 +160,6 @@ public class Energy
                 gainRate = GAIN_RATE_01;
                 break;
         }
-
     }
 
 }

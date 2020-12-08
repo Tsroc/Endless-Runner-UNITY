@@ -9,12 +9,13 @@ public class CitySpawner : MonoBehaviour
         CitySpawner spawns city plots to the right and left of the track.
     */
 
+    [SerializeField] private List<GameObject> plotsPrefab;
+
     private SpawnManager spawnManager;
     private GameObject cityplotParent;
-    [SerializeField] private List<GameObject> plotsPrefab;
+
     private List<GameObject> leftPlots;
     private List<GameObject> rightPlots;
-    
     private float size = 25;
     private float xPosL = -17.5f;
     private float xPosR = 17.5f;

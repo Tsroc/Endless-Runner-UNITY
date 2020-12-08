@@ -10,7 +10,9 @@ public class MusicPlayer : MonoBehaviour
         SetupSingleton();
     }
 
-    // add a method to setup as a singleton
+    /*
+        Setup as a singleton
+    */
     private void SetupSingleton(){
         if(FindObjectsOfType(GetType()).Length > 1){
             Destroy(gameObject); 

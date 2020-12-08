@@ -10,14 +10,14 @@ public class ObstacleSpawner: MonoBehaviour
         There are three difficulty levels for obstacles, obstacles spawned are based on the difficulty level selected.
     */
 
-    private SpawnManager spawnManager;
-    private GameObject obstacleParent;
     [SerializeField] private List<GameObject> obstacles01Prefab;
     [SerializeField] private List<GameObject> obstacles02Prefab;
     [SerializeField] private List<GameObject> obstacles03Prefab;
-    private List<GameObject> obstaclePlots;
 
-    // Setting up the plots. 
+    private SpawnManager spawnManager;
+    private GameObject obstacleParent;
+
+    private List<GameObject> obstaclePlots;
     private float plotSize = 25;
     private float prevZPos = 50;
     private float zPos = 0;

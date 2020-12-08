@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
         PlayerController manages the controls available to the player, along with collision management.
     */
 
+    [SerializeField] private float jumpVelocity = 5.0f; 
+    
     private SpawnManager spawnManager;
     private Rigidbody rb;
     private Animator animator;
@@ -16,10 +18,8 @@ public class PlayerController : MonoBehaviour
 
     private float movementSpeed = 0;//10f;
     private float xMovementSpeed = 0f;
-    [SerializeField] private float jumpVelocity = 5.0f; 
     private float yaw = 15.0f;
     private float screenClamp = 4.8f;
-
     private bool grounded = true;
     private bool hasEnergy = true;
     
@@ -52,7 +52,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // This method is used to allow the player to remain static until start button is selected.
+    /*
+        This method is used to allow the player to remain static until start button is selected.
+    */
     public void SetupMovement()
     {
         movementSpeed = 10f;
@@ -93,10 +95,8 @@ public class PlayerController : MonoBehaviour
         if(other.tag == "EnergyPickup")
         {
             // Increases the players energy.
-            // Should destroy the apple, how? 
             Debug.Log("EnergyPickup");
 			energy.GainPowerup();
-            //Destroy(other);
         }
 
     }

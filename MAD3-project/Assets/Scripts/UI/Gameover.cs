@@ -12,6 +12,9 @@ public class Gameover : MonoBehaviour
         UpdateDistance();
     }
 
+    /*
+        Updates the gameover distance travelled.
+    */
     private void UpdateDistance()
     {
         int dist = PlayerPrefs.GetInt("DistanceTravelled");

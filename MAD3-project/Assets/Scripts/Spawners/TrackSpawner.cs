@@ -11,8 +11,9 @@ public class TrackSpawner: MonoBehaviour
 
     [SerializeField] private GameObject trackPrefab;
     [SerializeField] private List<GameObject> tracks; 
+    
     private GameObject trackParent;
-
+    
     private float offset = 25f;
 
     void Start()
