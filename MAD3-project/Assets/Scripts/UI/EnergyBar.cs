@@ -28,15 +28,15 @@ public class EnergyBar : MonoBehaviour
     {
         if(energy != null)
         {
+            energy.Update();
+            barImg.fillAmount = energy.GetEnergyNormalized();
+
             if(energy.GetCurrent() == 0)
             {
                 // Ends the game.
                 gameManager.SendMessage("EndGame");
                 energy = null;
             }
-
-            energy.Update();
-            barImg.fillAmount = energy.GetEnergyNormalized();
         }
     }
 

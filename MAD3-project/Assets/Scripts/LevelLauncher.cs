@@ -25,12 +25,6 @@ public class LevelLauncher : MonoBehaviour
 
         if(PhotonNetwork.IsConnected)
         {
-            if(PhotonNetwork.CurrentRoom.PlayerCount > 1)
-            {
-                // Adjust positions to accommodate the number of players.
-                // Could use an array of transforms - hold them, assign as needed.
-            }
-
             if (NetworkedPlayer.LocalPlayerInstance == null)  // Instantiate the network prefabs.
             {
                 if(PhotonNetwork.IsMasterClient)

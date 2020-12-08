@@ -428,7 +428,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefabs:
   - {fileID: 1124996059}
-  - {fileID: 0}
   levelStartDelay: 1.5
   startButton: {fileID: 1206534621}
 --- !u!114 &401759894
