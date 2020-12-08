@@ -13,11 +13,11 @@ public class EnergyBar : MonoBehaviour
     private Image barImg;
     private Energy energy;
     private GameObject player;
-    private SceneController sceneController; 
+    private GameManager gameManager;
 
     private void Start()
     {
-        sceneController = GameObject.Find("SceneController").GetComponent<SceneController>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         player = GameObject.FindWithTag("Player");
         barImg = transform.Find("Energy").GetComponent<Image>();
         energy = new Energy();
@@ -31,7 +31,7 @@ public class EnergyBar : MonoBehaviour
             if(energy.GetCurrent() == 0)
             {
                 // Ends the game.
-                sceneController.SendMessage("Gameover");
+                gameManager.SendMessage("EndGame");
                 energy = null;
             }
 

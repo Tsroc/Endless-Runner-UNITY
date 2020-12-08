@@ -1044,7 +1044,7 @@ GameObject:
   - component: {fileID: 1392777919}
   - component: {fileID: 1392777918}
   m_Layer: 5
-  m_Name: UI
+  m_Name: MainMenu_UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1491,8 +1491,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2988408765939851694, guid: f75d56811d12c154d83e082b40385ded, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f75d56811d12c154d83e082b40385ded, type: 3}
 --- !u!1001 &2282160240889719956
 PrefabInstance:
@@ -1568,24 +1567,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed70c686c703c5941af0ddf211b59280, type: 3}
---- !u!1 &5372124402350182202 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6510262114087817330, guid: f75d56811d12c154d83e082b40385ded,
-    type: 3}
-  m_PrefabInstance: {fileID: 1212741843526688584}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5372124402350182203
-MonoBehaviour:
+--- !u!1001 &8590882783540480537
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5372124402350182202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6ab6fd6564a5c34d8fe4fe45bcce1d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5561478180246935871, guid: 4665ee1211e83fd4ca6b19d421c768c1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 358.11566
+      objectReference: {fileID: 0}
+    - target: {fileID: 5561478180246935871, guid: 4665ee1211e83fd4ca6b19d421c768c1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 352.12778
+      objectReference: {fileID: 0}
+    - target: {fileID: 5561478180246935871, guid: 4665ee1211e83fd4ca6b19d421c768c1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -148.53296
+      objectReference: {fileID: 0}
+    - target: {fileID: 5561478180246935871, guid: 4665ee1211e83fd4ca6b19d421c768c1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5561478180246935871, guid: 4665ee1211e83fd4ca6b19d421c768c1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5561478180246935871, guid: 4665ee1211e83fd4ca6b19d421c768c1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5561478180246935871, guid: 4665ee1211e83fd4ca6b19d421c768c1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5561478180246935871, guid: 4665ee1211e83fd4ca6b19d421c768c1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5561478180246935871, guid: 4665ee1211e83fd4ca6b19d421c768c1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5561478180246935871, guid: 4665ee1211e83fd4ca6b19d421c768c1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5561478180246935871, guid: 4665ee1211e83fd4ca6b19d421c768c1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9129176358974442891, guid: 4665ee1211e83fd4ca6b19d421c768c1,
+        type: 3}
+      propertyPath: m_Name
+      value: MusicPlayer
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4665ee1211e83fd4ca6b19d421c768c1, type: 3}
 --- !u!4 &8995596617702489385 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7782854843000267361, guid: f75d56811d12c154d83e082b40385ded,

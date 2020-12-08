@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController_MainMenu : MonoBehaviour
+public class MainMenu_PlayerController: MonoBehaviour
 {
     /*
         PlayerController_MainMenu allows for player controls at the main sceen. Controls are limited to performing the rest animation.

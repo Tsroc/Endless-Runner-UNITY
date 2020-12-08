@@ -140,12 +140,12 @@ public class PlayerController : MonoBehaviour
 
     private void ProcessRotation()
     {
-        if (Input.GetAxis("Horizontal") > 0)
+        if (Input.GetAxis("Horizontal") > 0 && movementSpeed > 0)
         {   
             // Moves Right.
             transform.localRotation = Quaternion.Euler(0, yaw, 0);
         }
-        else if (Input.GetAxis("Horizontal") < 0) 
+        else if (Input.GetAxis("Horizontal") < 0 && movementSpeed > 0) 
         {
 
             // Moves Left.

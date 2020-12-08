@@ -9,13 +9,16 @@ public class GameManager : MonoBehaviour
         GameManager updates the distance travelled and updates it to the screen.
     */
     
-    private Transform camera;
+    private SceneController sceneController;
+    private Transform maincamera;
     [SerializeField] private Text distanceTravelled;
     private int offset = 2;
+    private int dist;
 
     void Start()
     {
-        camera = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        maincamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        sceneController = GameObject.Find("SceneController").GetComponent<SceneController>();
     }
 
     void Update()
@@ -28,7 +31,13 @@ public class GameManager : MonoBehaviour
     */
     private void UpdateDistance()
     {
-       int dist = Mathf.RoundToInt(camera.position.z) + offset;
+       dist = Mathf.RoundToInt(maincamera.position.z) + offset;
        distanceTravelled.text = dist.ToString() + "m";
+    }
+
+    public void EndGame()
+    {
+        PlayerPrefs.SetInt("DistanceTravelled", dist);
+        sceneController.Gameover();
     }
 }

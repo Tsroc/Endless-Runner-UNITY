@@ -30,7 +30,7 @@ public class PauseMenu : MonoBehaviour
         If true, sets timescale to 0 and displays the pause panel.
         If false, sets timescale to 1 and hides the pause panel.
     */
-    private void TogglePause(bool paused)
+    public void TogglePause(bool paused)
     {
         pausePanel.SetActive(paused);
         
