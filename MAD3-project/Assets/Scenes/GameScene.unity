@@ -428,8 +428,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefabs:
   - {fileID: 1124996059}
-  levelStartDelay: 1.5
   startButton: {fileID: 1206534621}
+  levelStartDelay: 1.5
 --- !u!114 &401759894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1251,6 +1251,11 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 4e0b28bff409c154da7051288e1d51ac, type: 3}
+    - target: {fileID: 3115732483630903894, guid: 4665ee1211e83fd4ca6b19d421c768c1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5561478180246935871, guid: 4665ee1211e83fd4ca6b19d421c768c1,
         type: 3}
       propertyPath: m_LocalPosition.x
